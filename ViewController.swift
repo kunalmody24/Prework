@@ -16,8 +16,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let newPosition = billAmountTextView.endOfDocument
-        billAmountTextView.selectedTextRange = billAmountTextView.textRange(from: newPosition, to: newPosition)
+        billAmountTextView.becomeFirstResponder()
         let defaults = UserDefaults.standard
         let tips = [defaults.string(forKey: "tip1"), defaults.string(forKey: "tip2"), defaults.string(forKey: "tip3")]
         
@@ -30,6 +29,9 @@ class ViewController: UIViewController, UITextViewDelegate {
         self.title = "Tip Calculator"
         billAmountTextView.delegate = self
     }
+    
+    // Used for making a textView the firstResponder
+    override var canBecomeFirstResponder: Bool { true }
     
     // Used for calculating tip and totalBill
     @IBAction func calculateTip(_ sender: Any) {
